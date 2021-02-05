@@ -1,5 +1,5 @@
 {
-  "name": "intram/php-sdk",
+  "name": "intram-sdk/php",
   "description": "Permet aux entreprises et aux particuliers de recevoir des paiements par mobile money, carte de crédit et compte bancaire en toute sécurité.",
   "type": "library",
   "license": "MIT",
