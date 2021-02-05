@@ -9,7 +9,7 @@ Built on the INTRAM HTTP API (beta).
 ## Installation via composer
 
 ```sh
-composer require intram/php-sdk
+composer require intram-sdk/php
 ```
 
 ## API configuration
