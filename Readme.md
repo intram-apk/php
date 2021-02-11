@@ -1,10 +1,9 @@
 # INTRAM PHP SDK
 
 
+Bibliothèque [PHP](https://www.php.net) for [INTRAM (intram.com)](https://intram.com).
 
-The [PHP](https://www.php.net) library for [INTRAM (intram.com)](https://intram.com).
-
-Built on the INTRAM HTTP API (beta).
+Construit sur l'API HTTP INTRAM (bêta).
 
 ## Installation via composer
 
@@ -14,8 +13,7 @@ composer require intram-sdk/php
 
 ## API configuration
 
-Setup intram API keys.
-
+Configurez les clés d'API intram.
 ```php
 $paycfa = new \intram\PayCfa\PayCfa(
             "5b06f06a0aad7d0163c414926b635ee9cdf41438de0f09d70a4acf153083b7ed375a691e3513b42544530469e1ff8657b34508dc61927048444dd6dc9ccbb87f",
@@ -24,24 +22,24 @@ $paycfa = new \intram\PayCfa\PayCfa(
             "marchand_id",
             true)
 ```
-Log in to your Intram account, click on Developer, then on API at this level, get the API keys and give them as arguments to the controller.
-Initialize Intram PayCfa by entering in order: `PUBLIC_KEY`,` PRIVATE_KEY`, `INTRAM_SECRET`,` INTRAM_MARCHAND_KEY`, `MODE`
-The mode: `true` for live mode and `false` for test mode.
+Connectez-vous à votre compte Intram, cliquez sur Développeur, puis sur API à ce niveau, récupérez les clés API et donnez-les comme arguments au contrôleur.
+Initialisez Intram PayCfa en entrant dans l'ordre: `PUBLIC_KEY`,` PRIVATE_KEY`, `INTRAM_SECRET`,` INTRAM_MARCHAND_KEY`, `MODE`
+Le mode: `true` pour le mode live et` false` pour le mode test.
 
 
-##Configure your department / company information
+##Configurez les informations de votre service / entreprise
 
 
 
-###### Setting Store name
-(required)
+###### Définition du nom de la boutique
+(requis)
 ```php
 $paycfa->setNameStore("Suntech Store"); 
 ```
 
 
 
-###### Setting Store Logo Url
+###### Définition de l'URL du logo de la boutique
 
 ```php
 $paycfa->setLogoUrlStore("https://www.suntechshop/logo.png");
@@ -49,7 +47,7 @@ $paycfa->setLogoUrlStore("https://www.suntechshop/logo.png");
 
 
 
-###### Setting Store Web site
+###### Configuration du site Web de la boutique
 
 ```php
 $paycfa->setWebSiteUrlStore("https://www.suntechshop");
@@ -57,7 +55,7 @@ $paycfa->setWebSiteUrlStore("https://www.suntechshop");
 
 
 
-###### Setting Store phone
+###### Configuration du numéro de téléphone 
 
 ```php
 $paycfa->setPhoneStore("97000000");
@@ -65,18 +63,18 @@ $paycfa->setPhoneStore("97000000");
 
 
 
-###### Setting Store Postal adress
+###### Configuration de l'adresse postale 
 
 ```php
 $paycfa->setPostalAdressStore("BP 35");
 ```
 
-##Create a request paiement
-In order to allow the user to make a payment on your store, you must create the transaction and then send them the payment url or the qr code to scan. 
-For that :
+##Créer une transaction de paiement
+Afin de permettre à l'utilisateur d'effectuer un paiement sur votre boutique, vous devez créer la transaction puis lui envoyer l'url de paiement ou le code qr à scanner.
+Pour ça :
 
 ###### Add Invoice Items
-Add the different products of the purchase (required)
+Ajouter les différents produits de l'achat (obligatoire)
 ```php
 $paycfa->setItems([
             ['name'=>"T-shirt",'qte'=>"2",'price'=>"500",'totalamount'=>"1000"],
@@ -84,73 +82,73 @@ $paycfa->setItems([
         ]);
 ```
 
-###### Setting TVA Amount
-TVA (optional)
+###### Configuration du montant de la TVA
+TVA (optionnel)
 ```php
 payfa->setTva([["name" => "VAT (18%)", "amount" => 1000],["name" => " other VAT", "amount" => 500]]);
 ```
 
 
-###### Adding Custom Data
-(optional)
+###### Ajout de données personnalisées
+(optionnel)
 ```php
 $paycfa->setCustomData([['CartID',"32393"],['PERIOD',"TABASKI"]]);
 ```
 
 
 
-###### Setting Total Amount 
-Order total (required)
+###### Définition du montant total
+Total de la commande (obligatoire)
 ```php
 $paycfa->setAmount(13600);
 ```
-###### Setting Currency 
-Currency of paiement (required)
+###### Définition de la devise 
+Devise de paiement (obligatoire)
 ```php
 $paycfa->setCurrency("XOF");
 ```
 
-###### Setting Description 
-Description of operation (required)
+######  Description 
+Description de l'opération (obligatoire)
 ```php
 $paycfa->setDescription("Pretty and suitable for your waterfall");
 ```
 
 
-###### Setting Template 
- (required)
+###### Template a utilisé sur le portail de paiement
+ (obligatoire)
 ```php
 $paycfa->setTemplate("default");
 ```
 
 
-###### Setting Store Redirection Url
-
+###### Définition de l'URL de redirection de la boutique
+(optionnel)
 ```php
 $paycfa->setRedirectionUrl("https://www.suntechshop/redirection-url");
 ```
 
 
-###### Setting Store Return Url
-
+###### Définition de l'URL de retour du magasin
+(optionnel)
 ```php
 $paycfa->setReturnUrl("https://www.suntechshop/return-url");
 ```
 
 
-###### Setting Store Cancel Url
-
+###### Définition de l'URL d'annulation du magasin
+(optionnel)
 ```php
 $paycfa->setCancelUrl("https://www.suntechshop/cancel-url");
 ```
 
 
-###### Make the payment request
-
+###### Faire la demande de paiement
+(obligatoire)
 ```php
 $response = json_decode($paycfa->setRequestPayment());
 ```
-###### Expected response
+###### Réponse attendue
 
 ```php
 {
@@ -163,7 +161,7 @@ $response = json_decode($paycfa->setRequestPayment());
 }
 ```
 
-###### Get data
+###### Récupération des données
 ```php
 $transaction_id = $response->transaction_id;
 $status = $response->status;
@@ -173,14 +171,14 @@ $message = $response->message;
 $error = $response->error;
 ```
 
-##Get transaction status
+##Obtenir le statut de la transaction
 
-Give the transaction identifier as an argument to the function (required)
+Passer l'identifiant de la transaction comme argument à la fonction (obligatoire)
 ```php
 $paycfa->getTransactionStatus(5f2d7a96b97d9d3fea912c11); 
 ```
 
-###### Expected response
+###### Réponse attendue
 
 ```php
 {
